@@ -1,9 +1,12 @@
 #ifndef COMMANDS_H
 #define COMMANDS_H
 
-void built_in_cd(char **args);
-void built_in_exit(void);
-void built_in_path(char **args);
-void built_in_myhistory(char **args);
+#include "shellmain.h"
 
-#endif
+// Function prototypes
+void cd_function(char **args);
+void exit_function();
+void path_function(char **args);
+void myhistory_function(char **args);
+
+#endif // COMMANDS_H
