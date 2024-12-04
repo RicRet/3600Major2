@@ -2,10 +2,10 @@
 #include "commands.h"
 
 // Shared variables
-char *history[MAX_HISTORY] = {NULL};
+char *history[MAX_HISTORY] = {NULL};//array to store history
 int history_index = 0;
 
-char *path_list[MAX_PATHS] = {NULL};
+char *path_list[MAX_PATHS] = {NULL};//saves the path of the current shell
 int path_count = 0;
 
 void run_interactive_shell() {
@@ -14,16 +14,16 @@ void run_interactive_shell() {
         printf("major2shell> ");
         fflush(stdout);
         if (fgets(cmd, MAX_CMD_LENGTH, stdin) == NULL) {
-            break; // EOF or error
+            break; // End of file or error
         }
-        cmd[strcspn(cmd, "\n")] = 0; // Remove newline
+        cmd[strcspn(cmd, "\n")] = 0;
         if (strlen(cmd) == 0) {
             continue; // Ignore empty commands
         }
 
         // Save command to history
         if (history[history_index]) {
-            free(history[history_index]); // Free old history entry
+            free(history[history_index]);
         }
         history[history_index] = strdup(cmd);
         history_index = (history_index + 1) % MAX_HISTORY;
@@ -40,7 +40,7 @@ void run_batch_mode(char *batch_file) {
     }
     char cmd[MAX_CMD_LENGTH];
     while (fgets(cmd, MAX_CMD_LENGTH, file) != NULL) {
-        cmd[strcspn(cmd, "\n")] = 0; // Remove newline
+        cmd[strcspn(cmd, "\n")] = 0; 
         if (strlen(cmd) == 0) {
             continue; // Ignore empty lines
         }
@@ -170,7 +170,7 @@ void handle_pipeline(char *cmd) {
     wait(NULL);
 }
 
-void handle_builtin(char *cmd) {
+void handle_builtin(char *cmd) {//function to use the commands required
     char *args[MAX_ARGS];
     char *token = strtok(cmd, " ");
     int i = 0;

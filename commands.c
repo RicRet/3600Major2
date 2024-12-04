@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void cd_function(char **args) {
+void cd_function(char **args) {//created by George
     if (args[1] == NULL) {
         fprintf(stderr, "cd: expected argument to \"cd\"\n");
     } else if (chdir(args[1]) != 0) {
@@ -15,12 +15,12 @@ void cd_function(char **args) {
     }
 }
 
-void exit_function(void) {
+void exit_function(void) {//created by Ricardo
     printf("Exiting the shell...\n");
     exit(EXIT_SUCCESS);
 }
 
-void path_function(char **args) {
+void path_function(char **args) {//created by Ismaeil
     if (!args[1]) {
         printf("Path: ");
         for (int i = 0; i < path_count; i++) printf("%s:", path_list[i]);
@@ -42,7 +42,7 @@ void path_function(char **args) {
 }
 
 
-void myhistory_function(char **args) {
+void myhistory_function(char **args) {//created by Jose
     for (int i = 0; i < 20; i++) {
         if (history[i] != NULL) {
             printf("%d: %s\n", i, history[i]);

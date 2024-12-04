@@ -1,7 +1,7 @@
 #ifndef SHELLMAIN_H
 #define SHELLMAIN_H
 
-// Define POSIX compliance for Linux compatibility
+// Define Posix to prevent issues in cell machines
 #define _POSIX_C_SOURCE 200809L
 
 #include <stdio.h>
@@ -24,7 +24,6 @@ extern int history_index;
 extern char *path_list[MAX_PATHS];
 extern int path_count;
 
-// Function prototypes
 void execute_command(char *cmd);
 void handle_redirection(char *cmd);
 void handle_pipeline(char *cmd);
