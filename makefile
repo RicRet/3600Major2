@@ -1,22 +1,25 @@
-#makefile for major 2, will create executable named major2shell
+#makefile for major2, will create an executable called shell
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c99
 LDFLAGS = -lm
-OBJ = shellmain.o commands.o
-EXEC = major2shell
+TARGET = major2shell
+SOURCES = main.c shellmain.c commands.c
+OBJECTS = $(SOURCES:.c=.o)
 
-all: $(EXEC)
+# Default rule
+all: $(TARGET)
 
-$(EXEC): $(OBJ)
-	$(CC) $(OBJ) -o $(EXEC) $(LDFLAGS)
+# Rule to link the final executable
+$(TARGET): $(OBJECTS)
+	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(LDFLAGS)
 
-shellmain.o: shellmain.c shellmain.h
-	$(CC) $(CFLAGS) -c shellmain.c
+# Rule to compile .c files to .o files
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-commands.o: commands.c commands.h
-	$(CC) $(CFLAGS) -c commands.c
-
+# Clean rule to remove build files
 clean:
-	rm -f $(OBJ) $(EXEC)
+	rm -f $(OBJECTS) $(TARGET)
 
-rebuild: clean all
+# Phony targets
+.PHONY: all clean
